@@ -118,6 +118,7 @@ const putBotBack = (id) => {
 }
 
 const drawFive = () => {
+    console.log('draw btn connected')
     axios.get('/api/robots/five')
         .then(res => {
             choices = res.data.choices
