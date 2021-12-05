@@ -4,15 +4,36 @@ const path = require('path')
 const app = express()
 const {bots, playerRecord} = require('./data')
 const {shuffleArray} = require('./utils')
+const res = require('express/lib/response')
+
+const Rollbar = require('rollbar')
+
+var rollbar = new Rollbar({
+  accessToken: '6e89c591220a4ac1813c04fa6818c5ff',
+  captureUncaught: true,
+  captureUnhandledRejections: true,
+})
 
 app.use(express.json())
 app.use(cors())
 
-app.use('/static', express.static('/public'));
+app.use('/', express.static('public'));
+
+// app.get('/', (req, res) => {
+//     res.sendFile(path.join(__dirname, 'public/index.html'))
+// })
+
+app.get('/styles', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public/index.css'))
+})
+
+app.get('/js', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public/index.js'))
+})
 
 app.get('/api/robots', (req, res) => {
     try {
-        res.status(200).send(botsArr)
+        res.status(200).send(bots)
     } catch (error) {
         console.log('ERROR GETTING BOTS', error)
         res.sendStatus(400)
@@ -74,5 +95,7 @@ app.get('/api/player', (req, res) => {
 const port = process.env.PORT || 3000
 
 app.listen(port, () => {
+    // rollbar.info('server fired up')
+
   console.log(`Listening on port ${port}`)
 })
