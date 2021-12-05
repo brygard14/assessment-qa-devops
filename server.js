@@ -32,7 +32,7 @@ app.get("/js", (req, res) => {
 });
 
 app.get("/api/robots", (req, res) => {
-  rollbar.log("button works, sent all robots");
+  rollbar.info("button works, sent all robots");
   try {
     res.status(200).send(bots);
   } catch (error) {
@@ -42,6 +42,7 @@ app.get("/api/robots", (req, res) => {
 });
 
 app.get("/api/robots/five", (req, res) => {
+    rollbar.info("here's some robots")
   try {
     let shuffled = shuffleArray(bots);
     let choices = shuffled.slice(0, 5);
@@ -54,6 +55,7 @@ app.get("/api/robots/five", (req, res) => {
 });
 
 app.post("/api/duel", (req, res) => {
+    rollbar.info("is it ethical to duel robots")
   try {
     // getting the duos from the front end
     let { compDuo, playerDuo } = req.body;

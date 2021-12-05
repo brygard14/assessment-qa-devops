@@ -1,5 +1,5 @@
 
-import { Builder, Capabilities, By } from "selenium-webdriver"
+import { Builder, Capabilities, By, Button } from "selenium-webdriver"
 
 require('chromedriver')
 
@@ -18,3 +18,18 @@ test('Title shows up when page loads', async () => {
     const displayed = await title.isDisplayed()
     expect(displayed).toBe(true)
 })
+
+// test('Random computer duo bots are not the same as user bots', async () => {
+//     await driver.sleep(3000);
+
+//     const allBtn = await driver.findElement(By.id("see-all"));
+//     await button.click();
+
+//     const
+// })
+
+// test('See All Bots always displays the Self-Aware Garbage Android', async () => {
+//     await driver.sleep(3000);
+
+//     const 
+// })
